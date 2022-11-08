@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "accounts")
 public class AccountModel {
 	@Id
-	private int accNo;
+	private String accNo;
 	private String accName;
 	private double amount;
 	private String currency;
@@ -15,7 +15,8 @@ public class AccountModel {
 
 	}
 
-	public AccountModel(int accNo, String accName, double amount, String currency) {
+	public AccountModel(String accNo, String accName, double amount,
+						String currency) {
 		super();
 		this.accNo = accNo;
 		this.accName = accName;
@@ -23,11 +24,11 @@ public class AccountModel {
 		this.currency = currency;
 	}
 
-	public int getAccNo() {
+	public String getAccNo() {
 		return accNo;
 	}
 
-	public void setAccNo(int accNo) {
+	public void setAccNo(String accNo) {
 		this.accNo = accNo;
 	}
 

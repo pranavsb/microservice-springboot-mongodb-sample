@@ -2,14 +2,12 @@ package com.hcl.controller;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hcl.model.AccountModel;
 import com.hcl.repository.AccountRepository;
@@ -37,5 +35,18 @@ public class AccountController {
 	  List<AccountModel> accounts =
               (List<AccountModel>) accountRepository.findAll();
       return ResponseEntity.ok(accounts);
+  }
+
+  @RequestMapping(
+          value = "/get/{accNo}",
+          method = RequestMethod.GET,
+          consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<AccountModel> getAccount(@PathVariable(
+          "accNo") String accNo) {
+    Optional<AccountModel> account = accountRepository.findById(accNo);
+    if (account.isPresent()) {
+      return ResponseEntity.ok(account.get());
+    }
+    return ResponseEntity.ok(null);
   }
 }
