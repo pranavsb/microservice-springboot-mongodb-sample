@@ -1,11 +1,11 @@
 package com.hcl.model;
 
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "accounts")
 public class AccountModel {
-
+	@Id
 	private int accNo;
 	private String accName;
 	private double amount;
